@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuthContext } from "@/contexts/AuthContext";
 import Login from "@/pages/Login";
-import Onboarding from "@/pages/Onboarding";
 import Dashboard from "@/pages/Dashboard";
 import NotFound from "@/pages/not-found";
 
@@ -23,13 +22,13 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     );
   }
 
+  console.log("user",user)
+
   if (!user) {
     return <Login />;
   }
 
-  if (!userProfile?.isOnboardingComplete) {
-    return <Onboarding />;
-  }
+  console.log("userProfile",userProfile)
 
   return <>{children}</>;
 }
@@ -38,7 +37,6 @@ function Router() {
   return (
     <Switch>
       <Route path="/login" component={Login} />
-      <Route path="/onboarding" component={Onboarding} />
       <Route path="/dashboard">
         <ProtectedRoute>
           <Dashboard />

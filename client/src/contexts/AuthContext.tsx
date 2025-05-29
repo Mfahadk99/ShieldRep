@@ -11,7 +11,6 @@ interface UserProfile {
   currentXP: number;
   totalXP: number;
   streak: number;
-  isOnboardingComplete: boolean;
   createdAt: any;
   businessName?: string;
 }

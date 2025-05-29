@@ -11,7 +11,6 @@ interface UserProfile {
   currentXP: number;
   totalXP: number;
   streak: number;
-  isOnboardingComplete: boolean;
   createdAt: any;
   businessName?: string;
 }
@@ -24,6 +23,8 @@ export const useAuth = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
       setUser(firebaseUser);
+
+      console.log("firebaseUser",firebaseUser)
       
       if (firebaseUser) {
         try {
@@ -48,6 +49,7 @@ export const useAuth = () => {
 
     // Handle redirect result on page load
     handleRedirectResult().then(async (result) => {
+      console.log("result",result)
       if (result?.user) {
         console.log('User signed in via redirect:', result.user);
         // Create profile for new user

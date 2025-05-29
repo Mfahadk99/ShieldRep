@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithRedirect, getRedirectResult, signOut, signInWithPopup } from "firebase/auth";
 import { getFirestore, collection, doc, setDoc, getDoc, updateDoc, query, where, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -10,6 +10,7 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID || "demo-app-id",
 };
 
+console.log("firebaseConfig",firebaseConfig)
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
@@ -19,7 +20,7 @@ googleProvider.addScope('email');
 googleProvider.addScope('profile');
 
 export const signInWithGoogle = () => {
-  return signInWithRedirect(auth, googleProvider);
+  return signInWithPopup(auth, googleProvider);
 };
 
 export const handleRedirectResult = () => {
@@ -51,7 +52,6 @@ export const createUserProfile = async (user: any, additionalData?: any) => {
         currentXP: 0,
         totalXP: 0,
         streak: 0,
-        isOnboardingComplete: false,
         ...additionalData
       });
     } catch (error) {

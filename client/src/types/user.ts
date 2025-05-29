@@ -10,7 +10,6 @@ export interface UserProfile {
   totalXP: number;
   streak: number;
   lastActiveDate?: Date;
-  isOnboardingComplete: boolean;
   createdAt: Date;
 }
 
