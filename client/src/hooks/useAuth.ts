@@ -32,7 +32,9 @@ export const useAuth = () => {
           
           // Fetch user profile from Firestore
           const profile = await getUserProfile(firebaseUser.uid);
-          setUserProfile(profile as UserProfile);
+          if (profile) {
+            setUserProfile(profile as UserProfile);
+          }
         } catch (error) {
           console.error('Error handling user profile:', error);
           setUserProfile(null);
