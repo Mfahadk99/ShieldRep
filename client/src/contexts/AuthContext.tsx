@@ -1,7 +1,20 @@
 import { createContext, useContext, ReactNode } from 'react';
 import { User } from 'firebase/auth';
-import { UserProfile } from '@/types/user';
 import { useAuth } from '@/hooks/useAuth';
+
+interface UserProfile {
+  id: string;
+  displayName: string;
+  email: string;
+  photoURL?: string;
+  level: number;
+  currentXP: number;
+  totalXP: number;
+  streak: number;
+  isOnboardingComplete: boolean;
+  createdAt: any;
+  businessName?: string;
+}
 
 interface AuthContextType {
   user: User | null;
