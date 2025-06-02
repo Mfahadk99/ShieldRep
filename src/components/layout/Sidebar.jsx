@@ -9,6 +9,9 @@ import {
   BadgePercent,
   Shield,
   X,
+  BadgeDollarSign,
+  DollarSign,
+  DollarSignIcon,
 } from "lucide-react";
 
 const menuItems = [
@@ -18,6 +21,7 @@ const menuItems = [
   { path: "/reviews", icon: ThumbsUp, label: "Reviews" },
   { path: "/media", icon: Image, label: "Media" },
   { path: "/badge", icon: BadgePercent, label: "Badge" },
+  { path: "/billing", icon: BadgeDollarSign, label: "Billing" },
 ];
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {

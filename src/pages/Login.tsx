@@ -10,7 +10,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-700 to-white">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-blue-500 via-purple-600 to-blue-500">
       <div className="max-w-md w-full">
         {/* App Logo and Branding */}
         <div className="text-center mb-8 animate-slide-up">
