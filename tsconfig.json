@@ -17,7 +17,13 @@
     "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["src/*"],
-      "@shared/*": ["./shared/*"]
+      "@ui/*": ["src/components/ui/*"],
+      "@layout/*": ["src/components/layout/*"],
+      "@pages/*": ["src/pages/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@lib/*": ["src/lib/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@types/*": ["src/types/*"]
     }
   }
 }

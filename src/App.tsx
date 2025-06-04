@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { Switch, Route, Redirect } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { TooltipProvider } from "@ui/tooltip";
-import { Toaster } from "@ui/toaster";
+import Dashboard from "@/pages/Dashboard";
 import { AuthProvider, useAuthContext } from "./contexts/AuthContext";
 import { queryClient } from "@/lib/queryClient";
-import Sidebar from "./components/layout/sidebar";
-import Header from "./components/layout/Header";
-import Login from "./pages/Login";
-import Dashboard from "@/pages/Dashboard";
+import Login from "@/pages/Login";
+import NotFound from "@/pages/not-found";
+import { TooltipProvider } from "@ui/tooltip";
+import { Toaster } from "@ui/toaster";
+import Sidebar from "@/components/layout/Sidebar";
+import Header from "@/components/layout/Header";
 import OptimizationPhases from "@/pages/OptimizationPhases";
 import Posts from "@/pages/Posts";
 import Reviews from "@/pages/Reviews";
 import Media from "@/pages/Media";
 import Badge from "@/pages/Badge";
 import Billing from "@/pages/Billing";
-import NotFound from "@/pages/not-found";
 
-// Protected Route wrapper
-function ProtectedRoute({ children }) {
+// Define props for ProtectedRoute
+type ProtectedRouteProps = {
+  children: ReactNode;
+};
+
+function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuthContext();
 
   if (loading) return null;
@@ -26,8 +30,12 @@ function ProtectedRoute({ children }) {
   return <>{children}</>;
 }
 
-// Layout wrapper
-function Layout({ children }) {
+// Define props for Layout
+type LayoutProps = {
+  children: ReactNode;
+};
+
+function Layout({ children }: LayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -43,7 +51,6 @@ function Layout({ children }) {
   );
 }
 
-// App Router
 function Router() {
   const { user, loading } = useAuthContext();
 
@@ -60,10 +67,12 @@ function Router() {
 
   return (
     <Switch>
+      {/* Login route */}
       <Route path="/login">
         {user ? <Redirect to="/dashboard" /> : <Login />}
       </Route>
 
+      {/* Protected routes */}
       <Route path="/dashboard">
         <ProtectedRoute>
           <Layout>
@@ -120,10 +129,12 @@ function Router() {
         </ProtectedRoute>
       </Route>
 
+      {/* Root redirect */}
       <Route path="/">
         <Redirect to={user ? "/dashboard" : "/login"} />
       </Route>
 
+      {/* 404 Not Found */}
       <Route>
         <NotFound />
       </Route>
@@ -131,7 +142,7 @@ function Router() {
   );
 }
 
-// Main App Component
+// Main App component
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>

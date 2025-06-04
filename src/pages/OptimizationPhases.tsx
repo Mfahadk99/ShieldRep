@@ -1,8 +1,9 @@
 import React from "react";
 import PhaseCard from "../components/ui/PhaseCard";
 import { optimizationPhases } from "../data/mockData";
+import { Phase } from "../types/user";
 
-const OptimizationPhases = () => {
+const OptimizationPhases: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -15,7 +16,7 @@ const OptimizationPhases = () => {
       </div>
 
       <div className="space-y-4">
-        {optimizationPhases.map((phase) => (
+        {optimizationPhases.map((phase: Phase) => (
           <PhaseCard key={phase.id} phase={phase} />
         ))}
       </div>

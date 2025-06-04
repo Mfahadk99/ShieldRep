@@ -1,7 +1,22 @@
 import React from "react";
 import { CheckCircle, ChevronRight } from "lucide-react";
 
-const PhaseCard = ({ phase }) => {
+// ✅ Define the types for Phase
+type Phase = {
+  id: number | string;
+  title: string;
+  description: string;
+  status: "completed" | "in-progress" | "pending";
+  progress: number;
+  items: string[];
+};
+
+// ✅ Props for the component
+type PhaseCardProps = {
+  phase: Phase;
+};
+
+const PhaseCard: React.FC<PhaseCardProps> = ({ phase }) => {
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
       <div className="flex items-center justify-between mb-4">
@@ -36,6 +51,7 @@ const PhaseCard = ({ phase }) => {
         </div>
       </div>
 
+      {/* Progress bar */}
       <div className="mb-4">
         <div className="w-full bg-gray-200 rounded-full h-2">
           <div
@@ -51,6 +67,7 @@ const PhaseCard = ({ phase }) => {
         </div>
       </div>
 
+      {/* Items */}
       <div className="grid grid-cols-2 gap-2">
         {phase.items.map((item, index) => (
           <div
@@ -69,6 +86,7 @@ const PhaseCard = ({ phase }) => {
         ))}
       </div>
 
+      {/* Continue button */}
       <div className="mt-4 flex justify-end">
         <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
           <span>Continue</span>

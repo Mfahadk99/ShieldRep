@@ -10,11 +10,22 @@ import {
   Shield,
   X,
   BadgeDollarSign,
-  DollarSign,
-  DollarSignIcon,
 } from "lucide-react";
 
-const menuItems = [
+// ✅ Define prop types
+type SidebarProps = {
+  sidebarOpen: boolean;
+  setSidebarOpen: (value: boolean) => void;
+};
+
+// ✅ Menu items type
+type MenuItem = {
+  path: string;
+  icon: React.ElementType;
+  label: string;
+};
+
+const menuItems: MenuItem[] = [
   { path: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { path: "/optimization", icon: FileText, label: "Optimization" },
   { path: "/posts", icon: BarChart, label: "Posts" },
@@ -24,7 +35,7 @@ const menuItems = [
   { path: "/billing", icon: BadgeDollarSign, label: "Billing" },
 ];
 
-const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen }) => {
   const [location, navigate] = useLocation();
 
   return (
@@ -40,9 +51,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-200 transform transition-transform duration-300 ease-in-out
-        ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:translate-x-0 lg:static lg:inset-0`}
+        ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+        lg:translate-x-0 lg:static lg:inset-0`}
       >
         {/* Header */}
         <div className="flex items-center justify-between px-6 h-[73px] border-b border-gray-200">

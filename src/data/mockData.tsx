@@ -1,4 +1,6 @@
-export const optimizationPhases = [
+import type { Phase } from "../types/user";
+
+export const optimizationPhases: Phase[] = [
   {
     id: 1,
     title: "Core Info",
@@ -56,6 +58,7 @@ export const optimizationPhases = [
   },
 ];
 
+// Baaki data ko agar chahte ho to waise hi rehne do, unme type hint zaroori nahi yehaan
 export const recentPosts = [
   {
     id: 1,

@@ -35,7 +35,7 @@ export interface TaskItem {
   userId: string;
   title: string;
   description?: string;
-  category: 'photos' | 'reviews' | 'posts' | 'profile';
+  category: "photos" | "reviews" | "posts" | "profile";
   xpReward: number;
   isCompleted: boolean;
   completedAt?: Date;
@@ -55,6 +55,15 @@ export interface Achievement {
   unlockedAt?: Date;
   createdAt: Date;
 }
+
+export type Phase = {
+  id: number | string;
+  title: string;
+  description: string;
+  status: "completed" | "in-progress" | "pending";
+  progress: number; // should be a number between 0 and 100
+  items: string[];
+};
 
 export interface AppStats {
   profileViews: number;
