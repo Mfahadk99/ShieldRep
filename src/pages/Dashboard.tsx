@@ -3,10 +3,35 @@ import { ProgressRing } from "@/components/ProgressRing";
 import { TaskCard } from "@/components/TaskCard";
 import { AchievementCard } from "@/components/AchievementCard";
 import { TaskItem, Achievement, AppStats } from "@/types/user";
+import { useBusinessInsights, useBusinessMedia, useBusinessPosts, useBusinessProfiles, useBusinessReviews } from "@/hooks/useBusinessProfile";
+import { calculateHealthScore } from "@/utils/getHealthScore";
+import { mockAchievements, mockTasks } from "@/data/mockData";
 
 export default function Dashboard() {
   const { userProfile } = useAuthContext();
 
+  const { data: businessProfiles } = useBusinessProfiles();
+  const insights = useBusinessInsights(businessProfiles?.locations[0].locationName || "");
+  const reviews = useBusinessReviews(businessProfiles?.locations[0].locationName || "");
+  const media = useBusinessMedia(businessProfiles?.locations[0].locationName || "");
+  const posts = useBusinessPosts(businessProfiles?.locations[0].locationName || "");
+
+  // if (
+  //   insights.isLoading ||
+  //   reviews.isLoading ||
+  //   media.isLoading ||
+  //   posts.isLoading
+  // )
+  //   return <div>Loading health score...</div>;
+
+  const scoreData = calculateHealthScore({
+    insights: insights.data,
+    reviews: reviews.data,
+    media: media.data,
+    posts: posts.data,
+  });
+
+  console.log("scoreData",scoreData);
   // Mock data for demonstration
   const mockStats: AppStats = {
     profileViews: 1247,
@@ -14,76 +39,6 @@ export default function Dashboard() {
     photosAdded: 23,
     postsPublished: 8,
   };
-
-  const mockTasks: TaskItem[] = [
-    {
-      id: "1",
-      userId: "user1",
-      title: "Upload 3 new photos",
-      description: "Add interior and food photos to showcase your business",
-      category: "photos",
-      xpReward: 50,
-      isCompleted: true,
-      createdAt: new Date(),
-    },
-    {
-      id: "2",
-      userId: "user1",
-      title: "Respond to 2 reviews",
-      description: "Use AI to craft professional responses",
-      category: "reviews",
-      xpReward: 30,
-      isCompleted: false,
-      createdAt: new Date(),
-    },
-    {
-      id: "3",
-      userId: "user1",
-      title: "Create weekly post",
-      description: "Share what's new at your business",
-      category: "posts",
-      xpReward: 40,
-      isCompleted: false,
-      createdAt: new Date(),
-    },
-  ];
-
-  const mockAchievements: Achievement[] = [
-    {
-      id: "1",
-      userId: "user1",
-      title: "Photo Enthusiast",
-      description: "Uploaded 20+ photos",
-      iconName: "camera",
-      category: "photos",
-      xpReward: 100,
-      isUnlocked: true,
-      unlockedAt: new Date(),
-      createdAt: new Date(),
-    },
-    {
-      id: "2",
-      userId: "user1",
-      title: "Review Responder",
-      description: "Respond to 10 reviews",
-      iconName: "reply",
-      category: "reviews",
-      xpReward: 75,
-      isUnlocked: false,
-      createdAt: new Date(),
-    },
-    {
-      id: "3",
-      userId: "user1",
-      title: "Week Warrior",
-      description: "7-day activity streak",
-      iconName: "fire",
-      category: "streak",
-      xpReward: 50,
-      isUnlocked: false,
-      createdAt: new Date(),
-    },
-  ];
 
   const completedTasks = mockTasks.filter((task) => task.isCompleted).length;
   const nextLevelXP = Math.ceil((userProfile?.level || 1) * 500);

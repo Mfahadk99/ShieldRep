@@ -1,4 +1,131 @@
-import type { Phase } from "../types/user";
+import type { Achievement, Phase, TaskItem } from "../types/user";
+
+// GET https://mybusinessbusinessinformation.googleapis.com/v1/accounts/{accountId}/locations
+export const businessProfiles = {
+  "locations": [
+    {
+      "name": "accounts/123456789012345678901/locations/9876543210",
+      "title": "The Coffee Hub",
+      "locationName": "the-coffee-hub-san-fran",
+      "primaryPhone": "+14155552671",
+      "websiteUrl": "https://thecoffeehub.com",
+      "locationKey": {
+        "placeId": "ChIJrTLr-GyuEmsRBfy61i59si0"
+      },
+      "address": {
+        "regionCode": "US",
+        "postalCode": "94105",
+        "administrativeArea": "CA",
+        "locality": "San Francisco",
+        "addressLines": [
+          "123 Main Street"
+        ]
+      },
+      "primaryCategory": {
+        "displayName": "Coffee Shop"
+      },
+      "openInfo": {
+        "status": "OPEN",
+        "canReopen": true
+      }
+    }
+  ]
+}
+// GET https://mybusiness.googleapis.com/v4/accounts/{accountId}/locations/{locationId}/insights
+export const businessProfileInsights = {
+  "locationMetrics": [
+    {
+      "metric": "ALL",
+      "timeSeries": [
+        {
+          "startTime": "2024-05-01T00:00:00Z",
+          "endTime": "2024-05-31T23:59:59Z",
+          "value": {
+            "searchViews": 1200,
+            "mapViews": 800,
+            "websiteActions": 150,
+            "callActions": 70,
+            "directionActions": 90
+          }
+        }
+      ]
+    }
+  ]
+}
+
+// GET https://mybusiness.googleapis.com/v4/accounts/{accountId}/locations/{locationId}/reviews
+export const businessProfileReviews = {
+  "reviews": [
+    {
+      "reviewId": "review123",
+      "starRating": "FIVE",
+      "comment": "Awesome coffee and great vibes!",
+      "reviewer": {
+        "displayName": "Alex Johnson"
+      },
+      "createTime": "2024-05-15T14:20:00Z"
+    },
+    {
+      "reviewId": "review124",
+      "starRating": "FOUR",
+      "comment": "Love the pastries, a bit pricey though.",
+      "reviewer": {
+        "displayName": "Monica Lee"
+      },
+      "createTime": "2024-05-14T10:15:00Z"
+    }
+  ]
+}
+
+// GET https://mybusinessbusinessinformation.googleapis.com/v1/accounts/{accountId}/locations/{locationId}/media
+export const businessProfileMediaList = {
+  "mediaItems": [
+    {
+      "mediaFormat": "PHOTO",
+      "sourceUrl": "https://example.com/photo1.jpg",
+      "description": "Signature Cappuccino",
+      "createTime": "2024-04-20T12:00:00Z"
+    },
+    {
+      "mediaFormat": "PHOTO",
+      "sourceUrl": "https://example.com/photo2.jpg",
+      "description": "Pastry Shelf",
+      "createTime": "2024-04-22T15:00:00Z"
+    }
+  ]
+}
+
+// POST https://mybusiness.googleapis.com/v4/accounts/{accountId}/locations/{locationId}/localPosts
+export const businessProfilePosts = {
+  "posts": [
+    {
+      "postId": "post001",
+      "summary": "Start your morning with our new Hazelnut Latte ☕️! Available now.",
+      "media": [
+        {
+          "sourceUrl": "https://example.com/hazelnut.jpg"
+        }
+      ],
+      "createTime": "2024-05-10T10:00:00Z"
+    },
+    {
+      "postId": "post002",
+      "summary": "Pastry Happy Hour: 2 for 1 every Friday, 5–7 PM 🍰",
+      "createTime": "2024-05-16T10:00:00Z"
+    }
+  ]
+}
+
+export const healthScoreData = {
+  "score": 72,
+  "breakdown": {
+    "coreInfo": 100,
+    "services": 70,
+    "productsOffers": 60,
+    "mediaAndQA": 80,
+    "reviewsSocials": 50
+  }
+}
 
 export const optimizationPhases: Phase[] = [
   {
@@ -58,7 +185,6 @@ export const optimizationPhases: Phase[] = [
   },
 ];
 
-// Baaki data ko agar chahte ho to waise hi rehne do, unme type hint zaroori nahi yehaan
 export const recentPosts = [
   {
     id: 1,
@@ -135,5 +261,75 @@ export const analyticsData = [
     change: "+22%",
     icon: "Globe",
     color: "orange",
+  },
+];
+
+export const mockTasks: TaskItem[] = [
+  {
+    id: "1",
+    userId: "user1",
+    title: "Upload 3 new photos",
+    description: "Add interior and food photos to showcase your business",
+    category: "photos",
+    xpReward: 50,
+    isCompleted: true,
+    createdAt: new Date(),
+  },
+  {
+    id: "2",
+    userId: "user1",
+    title: "Respond to 2 reviews",
+    description: "Use AI to craft professional responses",
+    category: "reviews",
+    xpReward: 30,
+    isCompleted: false,
+    createdAt: new Date(),
+  },
+  {
+    id: "3",
+    userId: "user1",
+    title: "Create weekly post",
+    description: "Share what's new at your business",
+    category: "posts",
+    xpReward: 40,
+    isCompleted: false,
+    createdAt: new Date(),
+  },
+];
+
+export const mockAchievements: Achievement[] = [
+  {
+    id: "1",
+    userId: "user1",
+    title: "Photo Enthusiast",
+    description: "Uploaded 20+ photos",
+    iconName: "camera",
+    category: "photos",
+    xpReward: 100,
+    isUnlocked: true,
+    unlockedAt: new Date(),
+    createdAt: new Date(),
+  },
+  {
+    id: "2",
+    userId: "user1",
+    title: "Review Responder",
+    description: "Respond to 10 reviews",
+    iconName: "reply",
+    category: "reviews",
+    xpReward: 75,
+    isUnlocked: false,
+    createdAt: new Date(),
+  },
+  {
+    id: "3",
+    userId: "user1",
+    title: "Week Warrior",
+    description: "7-day activity streak",
+    iconName: "fire",
+    category: "streak",
+    xpReward: 50,
+    isUnlocked: false,
+    createdAt: new Date(),
   },
 ];
