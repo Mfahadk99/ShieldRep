@@ -156,7 +156,7 @@ import React, { useState } from "react";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { signOutUser } from "@/lib/firebase";
 
-const Header = ({ toggleSidebar }) => {
+const Header = ({ toggleSidebar }: { toggleSidebar: () => void }) => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const { userProfile } = useAuthContext();
 
