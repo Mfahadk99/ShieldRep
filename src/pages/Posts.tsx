@@ -254,7 +254,7 @@ const Posts = () => {
     },
     {
       id: 2,
-      title: "New Team Member Welcome",
+      title: "New Team Members Welcome",
       date: "14/06/2025",
       status: "published",
       post: "This is a test post",
